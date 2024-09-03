@@ -1,6 +1,4 @@
-Sure! Below is a sample `README.md` file that you can include in your project. This README explains the purpose of the project, how the compiler and parser work, and how to run the project.
 
----
 
 # SimpleLang Compiler for an 8-bit CPU
 
