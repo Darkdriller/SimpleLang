@@ -90,7 +90,7 @@ endif:
 
    ```bash
    git clone https://github.com/Darkdriller/SimpleLang.git
-   cd simplelang-compiler
+   cd SimpleLang
    ```
 
 2. Build the project:
