@@ -40,9 +40,6 @@ impl NumberNode {
         println!("generating in r number node");
         Ok(())
     }
-    pub fn get_val(&self) -> i32 {
-        self.val
-    }
 }
 
 pub struct VariableNode {
@@ -85,9 +82,6 @@ impl VariableNode {
     pub fn is_declared(name: &str) -> bool {
         MEM_LOC.lock().unwrap().contains_key(name)
     }
-    pub fn get_val(&self) -> i32 {
-        self.name.parse().unwrap()
-    }
 }
 
 pub struct BinaryOpNode {
@@ -102,12 +96,12 @@ impl BinaryOpNode {
     }
 
     pub fn generate_l(&self, out: &mut dyn Write) -> io::Result<()> {
-        self.generate_code(out);
+        self.generate_code(out).expect("error in binary node");
         Ok(())
     }
 
     pub fn generate_r(&self, out: &mut dyn Write) -> io::Result<()> {
-        self.generate_code(out);
+        self.generate_code(out).expect("error in binary node");
         Ok(())
     }
 
@@ -126,9 +120,6 @@ impl BinaryOpNode {
             _ => return Err(io::Error::new(io::ErrorKind::InvalidInput, "unsupported binary op")),
         };
         Ok(())
-    }
-    pub fn get_val(&self) -> i32 {
-        0
     }
 }
 
@@ -160,9 +151,6 @@ impl VariableDec {
         println!("storing value to memory location");
         writeln!(out, "sta {}", self.get_memory_location())?; // Store the result in memory for 'y'
         Ok(())
-    }
-    pub fn get_val(&self) -> i32 {
-        0
     }
 }
 pub struct ConditionalNode {
@@ -225,8 +213,8 @@ impl BlockNode {
 
 pub trait ASTNode {
     fn generate_code(&self, out: &mut dyn Write) -> io::Result<()>;
-    fn generate_l(&self, out: &mut dyn Write) -> io::Result<()> { Ok(()) }
-    fn generate_r(&self, out: &mut dyn Write) -> io::Result<()> { Ok(()) }
+    fn generate_l(&self, _out: &mut dyn Write) -> io::Result<()> { Ok(()) }
+    fn generate_r(&self, _out: &mut dyn Write) -> io::Result<()> { Ok(()) }
 }
 
 

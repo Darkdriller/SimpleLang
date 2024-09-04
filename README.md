@@ -98,14 +98,22 @@ endif:
    ```bash
    cargo build --release
    ```
-
+3. Build using makefile:
+   ```bash
+   make
+   ```
 ### Running the Compiler
 
-To compile a SimpleLang source file and generate an assembly output:
+To compile a SimpleLang source file and generate an assembly output without building:
 
 ```bash
 cargo run --release -- path/to/your/source_file.txt
 ```
+To compile a simpleLang source file and generate an assembly output using makefile you need to unzip the zipped folder (if you are building using cargo you will have a target folder) and run the following command:
+```bash
+./target/release/compiler path/to/your/source_file.txt
+```
+
 
 This command will generate an assembly file in the same directory with the same name but with a `.asm` extension.
 
